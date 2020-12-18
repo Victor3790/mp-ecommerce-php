@@ -1,3 +1,20 @@
+<?php
+    // SDK de Mercado Pago
+    require __DIR__ .  '/vendor/autoload.php';
+
+    // Agrega credenciales
+    MercadoPago\SDK::setAccessToken('APP_USR-1159009372558727-072921-8d0b9980c7494985a5abd19fbe921a3d-617633181');
+
+    $preference = new MercadoPago\Preference();
+
+    $item = new MercadoPago\Item();
+    $item->title = $_POST['title'];
+    $item->quantity = $_POST['unit'];
+    $item->unit_price = $_POST['price'];
+
+    $preference->items = array($item);
+    $preference->save();
+?>
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -130,7 +147,11 @@
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
                                     </div>
-                                    <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                                    <script
+                                        src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
+                                        data-preference-id="<?php echo $preference->id; ?>">
+                                    </script>
+                                    <!--<button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>-->
                                 </div>
                             </div>
                         </div>
