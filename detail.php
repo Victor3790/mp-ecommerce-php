@@ -11,6 +11,13 @@
     $item->title = $_POST['title'];
     $item->quantity = $_POST['unit'];
     $item->unit_price = $_POST['price'];
+    $item->currency_id = 'MXN';
+
+    $home = $_SERVER['HTTP_REFERER'];
+    $image = substr($_POST['img'], 2);
+    $image_url = $home . $image;
+
+    $payer = new MercadoPago\Payer();
 
     $preference->items = array($item);
     $preference->save();
@@ -59,7 +66,7 @@
 
 
 <body class="as-theme-light-heroimage">
-
+        
     <div class="stack">
         
         <div class="as-search-wrapper" role="main">
@@ -136,6 +143,7 @@
                                             <h3 class="as-producttile-name">
                                                 <p class="as-producttile-tilelink">
                                                     <span data-ase-truncate="2"><?php echo $_POST['title'] ?></span>
+                                                    <?php echo $image_url; ?>
                                                 </p>
 
                                             </h3>
