@@ -4,22 +4,46 @@
 
     // Agrega credenciales
     MercadoPago\SDK::setAccessToken('APP_USR-1159009372558727-072921-8d0b9980c7494985a5abd19fbe921a3d-617633181');
-
-    $preference = new MercadoPago\Preference();
-
-    $item = new MercadoPago\Item();
-    $item->title = $_POST['title'];
-    $item->quantity = $_POST['unit'];
-    $item->unit_price = $_POST['price'];
-    $item->currency_id = 'MXN';
+    MercadoPago\SDK::setIntegratorId("dev_24c65fb163bf11ea96500242ac130004");
 
     $home = $_SERVER['HTTP_REFERER'];
     $image = substr($_POST['img'], 2);
     $image_url = $home . $image;
 
+    $preference = new MercadoPago\Preference();
+    $preference->external_reference = 'victor182@msn.com';
+    $preference->back_urls = array( 'success' => $home . 'success.php',
+                                    'failure' => $home . 'failure.php',
+                                    'pending' => $home . 'pending.php',
+                                );
+    $preference->auto_return = 'approved';
+    $preference->payment_methods = array(
+        'excluded_payment_methods' => array( array( 'id' => 'amex' ) ),
+        'excluded_payment_types' => array( array( 'id' => 'atm' ) ),
+        'installments' => 6
+                                    );
+
+    $preference->notification_url = $home . 'notifications.php';
+
+    $item = new MercadoPago\Item();
+    $item->id = 1234;
+    $item->title = $_POST['title'];
+    $item->currency_id = 'MXN';
+    $item->picture_url = $image_url;
+    $item->description = 'Dispositivo móvil de Tienda e-commerce';
+    $item->quantity = $_POST['unit'];
+    $item->category_id = 'phones';
+    $item->unit_price = $_POST['price'];
+
     $payer = new MercadoPago\Payer();
+    $payer->name = 'Lalo';
+    $payer->surename = 'Landa';
+    $payer->email = 'test_user_81131286@testuser.com';
+    $payer->phone = array( 'area_code' => '52', 'number' => '5549737300' );
+    $payer->address = array( 'street_name' => 'Insurgentes Sur', 'street_number' => '1602', 'zip_code' => '0394​0' );
 
     $preference->items = array($item);
+    $preference->payer = $payer;
     $preference->save();
 ?>
 <!DOCTYPE html>
@@ -143,7 +167,6 @@
                                             <h3 class="as-producttile-name">
                                                 <p class="as-producttile-tilelink">
                                                     <span data-ase-truncate="2"><?php echo $_POST['title'] ?></span>
-                                                    <?php echo $image_url; ?>
                                                 </p>
 
                                             </h3>
@@ -155,10 +178,11 @@
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
                                     </div>
-                                    <script
+                                    <a href="<?php echo $preference->init_point; ?>">Pagar la compra</a>
+                                    <!--<script
                                         src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
-                                        data-preference-id="<?php echo $preference->id; ?>">
-                                    </script>
+                                        data-preference-id="<?php //echo $preference->id; ?>">
+                                    </script>-->
                                     <!--<button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>-->
                                 </div>
                             </div>
