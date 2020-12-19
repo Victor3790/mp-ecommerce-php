@@ -1,6 +1,6 @@
 <?php
 
-http_response_code(200);
+//http_response_code(200);
 
 require __DIR__ .  '/vendor/autoload.php';
 
