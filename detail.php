@@ -23,7 +23,7 @@
         'installments' => 6
                                     );
 
-    $preference->notification_url = $home . 'notifications.php?source_news=webhooks';
+    $preference->notification_url = $home . 'notifications1.php';
 
     $item = new MercadoPago\Item();
     $item->id = 1234;
