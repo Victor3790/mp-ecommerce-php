@@ -23,7 +23,7 @@
         'installments' => 6
                                     );
 
-    $preference->notification_url = $home . 'notifications1.php';
+    $preference->notification_url = $home . 'notifications100.php';
 
     $item = new MercadoPago\Item();
     $item->id = 1234;
