@@ -6,7 +6,7 @@ MercadoPago\SDK::setAccessToken('APP_USR-1159009372558727-072921-8d0b9980c749498
 
 $fichero = 'payments.txt';
 $actual = file_get_contents($fichero);
-$actual .= $_GET['data'];
+$actual .= var_dump($_POST);
 file_put_contents($fichero, $actual);
 
 ?>
