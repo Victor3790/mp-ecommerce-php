@@ -7,7 +7,12 @@ MercadoPago\SDK::setAccessToken('APP_USR-1159009372558727-072921-8d0b9980c749498
 $fichero = 'payments.txt';
 $actual = file_get_contents($fichero);
 //$payment_decode = json_decode( $payment, true );
-$actual .= var_dump( $_POST );
+
+if( isset($_POST['type']) )
+    $actual .= $_POST['type'];
+else
+    $actual .= 'No type available.';
+
 file_put_contents($fichero, $actual);
 
 switch($_POST["type"]) {
