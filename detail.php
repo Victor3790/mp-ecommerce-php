@@ -177,6 +177,7 @@
                                         <h3 >
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
+                                        <?php echo $home . 'notifications.php'; ?>
                                     </div>
                                     <a href="<?php echo $preference->init_point; ?>">Pagar la compra</a>
                                     <!--<script
