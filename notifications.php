@@ -20,11 +20,9 @@ switch($_POST["type"]) {
 }
 
 $fichero = 'payments.txt';
-// Abre el fichero para obtener el contenido existente
 $actual = file_get_contents($fichero);
-// Añade una nueva persona al fichero
-$actual .= 'Payment result: ' . $payment;
-// Escribe el contenido al fichero
+$payment_decode = json_decode( $payment, true );
+$actual .= 'Payment result: ' . $payment_decode;
 file_put_contents($fichero, $actual);
 
 ?>
