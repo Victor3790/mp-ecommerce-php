@@ -8,16 +8,16 @@ $fichero = 'payments.txt';
 $actual = file_get_contents($fichero);
 //$payment_decode = json_decode( $payment, true );
 
-if( isset($_POST['type']) )
+if( isset($_GET['type']) )
     $actual .= $_POST['type'];
 else
     $actual .= 'No type available.';
 
 file_put_contents($fichero, $actual);
 
-switch($_POST["type"]) {
+switch($_GET["type"]) {
     case "payment":
-        $payment = MercadoPago\Payment.find_by_id($_POST["id"]);
+        $payment = MercadoPago\Payment.find_by_id($_GET["id"]);
         $fichero = 'payments.txt';
         $actual = file_get_contents($fichero);
         //$payment_decode = json_decode( $payment, true );
