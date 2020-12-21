@@ -7,8 +7,11 @@ MercadoPago\SDK::setAccessToken('APP_USR-1159009372558727-072921-8d0b9980c749498
 switch($_POST["type"]) {
     case "payment":
         $payment = MercadoPago\Payment.find_by_id($_POST["id"]);
-        echo 'hey';
-        echo $payment;
+        $fichero = 'payments.txt';
+        $actual = file_get_contents($fichero);
+        //$payment_decode = json_decode( $payment, true );
+        $actual .= $payment;
+        file_put_contents($fichero, $actual);
         break;
     case "plan":
         $plan = MercadoPago\Plan.find_by_id($_POST["id"]);
