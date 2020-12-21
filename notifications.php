@@ -8,7 +8,7 @@ http_response_code(200);
 
 $fichero = 'payments.txt';
 $actual = file_get_contents($fichero);
-$actual .= $_POST['id'];
+$actual .= $_POST['data'];
 file_put_contents($fichero, $actual);
 
 ?>
