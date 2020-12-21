@@ -1,13 +1,5 @@
 <?php
 
-$fichero = '/payments.php';
-// Abre el fichero para obtener el contenido existente
-$actual = file_get_contents($fichero);
-// Añade una nueva persona al fichero
-$actual .= "John Smith\n";
-// Escribe el contenido al fichero
-file_put_contents($fichero, $actual);
-
 echo 'hola amigos';
 
 require __DIR__ .  '/vendor/autoload.php';
@@ -17,6 +9,7 @@ MercadoPago\SDK::setAccessToken('APP_USR-1159009372558727-072921-8d0b9980c749498
 switch($_POST["type"]) {
     case "payment":
         $payment = MercadoPago\Payment.find_by_id($_POST["id"]);
+        echo $payment;
         break;
     case "plan":
         $plan = MercadoPago\Plan.find_by_id($_POST["id"]);
